@@ -1,0 +1,44 @@
+.rice-card {
+  width: 25%; /* Adjust width to fit 4 cards in a row considering the gap */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  background-color: rgb(191, 255, 52);
+  padding: 10px;
+  margin: 10px;
+  max-width: 300px;
+  max-height: 300px;
+}
+
+.allDetailsContainer {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.detailContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  /* background-color: rgb(68, 95, 11); */
+}
+
+.detailTitle {
+  font-weight: bold;
+  margin: 0;
+  font-size: 20px;
+}
+
+.detailValue {
+  font-weight: normal;
+  font-size: 26px;
+  margin: 0;
+}

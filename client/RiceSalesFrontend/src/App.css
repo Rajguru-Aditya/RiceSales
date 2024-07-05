@@ -1,0 +1,17 @@
+#root {
+  /* max-width: 1280px; */
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.cardsContainer {
+  display: flex;
+  flex-direction: row; /* Change to row */
+  flex-wrap: wrap; /* Enable wrapping */
+  gap: 1rem;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+}
