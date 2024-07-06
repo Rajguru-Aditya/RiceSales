@@ -81,25 +81,73 @@ app.get("/api/sales/all-dates", async (req, res) => {
           _id: {
             date: { $dateToString: { format: "%Y-%m-%d", date: "$date" } },
             product: "$product",
+            paymentType: "$paymentType",
           },
           totalQuantity: { $sum: "$quantity" },
           totalPrice: { $sum: "$total" },
         },
       },
       {
-        $project: {
-          _id: 0,
-          date: "$_id.date",
-          product: "$_id.product",
-          totalQuantity: 1,
-          totalPrice: 1,
+        $group: {
+          _id: {
+            date: "$_id.date",
+            product: "$_id.product",
+          },
+          paymentDetails: {
+            $push: {
+              paymentType: "$_id.paymentType",
+              totalQuantity: "$totalQuantity",
+              totalPrice: "$totalPrice",
+            },
+          },
+          totalQuantity: { $sum: "$totalQuantity" },
+          totalPrice: { $sum: "$totalPrice" },
+          totalCash: {
+            $sum: {
+              $cond: [{ $eq: ["$_id.paymentType", "cash"] }, "$totalPrice", 0],
+            },
+          },
+          totalOnline: {
+            $sum: {
+              $cond: [
+                { $eq: ["$_id.paymentType", "online"] },
+                "$totalPrice",
+                0,
+              ],
+            },
+          },
         },
       },
       {
-        $sort: {
-          date: 1, // Sort by date in ascending order
-          product: 1, // Sort by product in ascending order within each date
+        $group: {
+          _id: "$_id.date",
+          products: {
+            $push: {
+              product: "$_id.product",
+              paymentDetails: "$paymentDetails",
+              totalQuantity: "$totalQuantity",
+              totalPrice: "$totalPrice",
+            },
+          },
+          totalQuantity: { $sum: "$totalQuantity" },
+          totalPrice: { $sum: "$totalPrice" },
+          totalCash: { $sum: "$totalCash" },
+          totalOnline: { $sum: "$totalOnline" },
         },
+      },
+      {
+        $project: {
+          _id: 0,
+          date: "$_id",
+          products: 1,
+          totalQuantity: 1,
+          totalPrice: 1,
+          totalCash: 1,
+          totalOnline: 1,
+        },
+      },
+      {
+        $sort: { date: 1 },
       },
     ]);
 

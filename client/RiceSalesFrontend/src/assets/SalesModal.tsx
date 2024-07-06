@@ -25,9 +25,18 @@ export default function BasicModal({
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   salesData: {
     date: string;
-    product: string;
     totalQuantity: number;
     totalPrice: number;
+    totalCash: number;
+    totalOnline: number;
+    products: {
+      product: string;
+      paymentDetails: {
+        paymentType: string;
+        totalQuantity: number;
+        totalPrice: number;
+      }[];
+    }[];
   }[];
 }) {
   const handleClose = () => setOpen(false);
@@ -43,29 +52,74 @@ export default function BasicModal({
         <Typography id="modal-modal-title" variant="h6" component="h2">
           Sales Summary
         </Typography>
-        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-          {salesData.length > 0 ? (
-            salesData.map((sale, index) => (
-              <div key={index} style={{ marginBottom: "10px" }}>
-                <Typography variant="body1">
-                  <strong>Date:</strong> {sale.date}
-                </Typography>
-                <Typography variant="body1">
-                  <strong>Product:</strong> {sale.product}
-                </Typography>
-                <Typography variant="body1">
-                  <strong>Total Quantity:</strong> {sale.totalQuantity}
-                </Typography>
-                <Typography variant="body1">
-                  <strong>Total Price:</strong> ₹{sale.totalPrice}
-                </Typography>
-                <hr />
-              </div>
-            ))
-          ) : (
-            <Typography>No sales data available.</Typography>
-          )}
-        </Typography>
+        {salesData.length > 0 ? (
+          salesData.map((dateData, index) => (
+            <Box key={index} sx={{ mt: 2 }}>
+              <Typography variant="h6">
+                Date: {new Date(dateData.date).toLocaleDateString()}
+              </Typography>
+              <Box sx={{ ml: 2 }}>
+                {dateData.products.map((productData, productIndex) => (
+                  <Box key={productIndex} sx={{ mb: 2 }}>
+                    <Typography variant="body1">
+                      <strong>Product:</strong> {productData.product}
+                    </Typography>
+                    <Box sx={{ ml: 2 }}>
+                      {productData.paymentDetails.map(
+                        (payment, paymentIndex) => (
+                          <Box key={paymentIndex}>
+                            <Typography variant="body2">
+                              <strong>Payment Type:</strong>{" "}
+                              {payment.paymentType}
+                            </Typography>
+                            <Typography variant="body2">
+                              <strong>Total Quantity:</strong>{" "}
+                              {payment.totalQuantity}
+                            </Typography>
+                            <Typography variant="body2">
+                              <strong>Total Price:</strong> ₹
+                              {payment.totalPrice}
+                            </Typography>
+                          </Box>
+                        )
+                      )}
+                    </Box>
+                  </Box>
+                ))}
+              </Box>
+              <Typography variant="body1">
+                <strong>
+                  Total Quantity for{" "}
+                  {new Date(dateData.date).toLocaleDateString()}:
+                </strong>{" "}
+                {dateData.totalQuantity}
+              </Typography>
+              <Typography variant="body1">
+                <strong>
+                  Total Price for {new Date(dateData.date).toLocaleDateString()}
+                  :
+                </strong>{" "}
+                ₹{dateData.totalPrice}
+              </Typography>
+              <Typography variant="body1">
+                <strong>
+                  Total Cash for {new Date(dateData.date).toLocaleDateString()}:
+                </strong>{" "}
+                ₹{dateData.totalCash}
+              </Typography>
+              <Typography variant="body1">
+                <strong>
+                  Total Online for{" "}
+                  {new Date(dateData.date).toLocaleDateString()}:
+                </strong>{" "}
+                ₹{dateData.totalOnline}
+              </Typography>
+              <hr />
+            </Box>
+          ))
+        ) : (
+          <Typography>No sales data available.</Typography>
+        )}
       </Box>
     </Modal>
   );

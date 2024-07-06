@@ -19,6 +19,7 @@ function App() {
   const [salesModalOpen, setSalesModalOpen] = useState(false);
   const [salesData, setSalesData] = useState([]);
   const apiDomain = "https://rice-sales-backend.vercel.app";
+  // const apiDomain = "http://localhost:5555";
 
   const getAllSales = async () => {
     try {
@@ -56,7 +57,7 @@ function App() {
         <button
           className={
             optionBtnClicked === "Loose"
-              ? "salesButton selectedBtn"
+              ? "salesButton selectedNavBtn"
               : "salesButton"
           }
           onClick={() => setOptionBtnClicked("Loose")}
