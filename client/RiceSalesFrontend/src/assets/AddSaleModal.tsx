@@ -6,6 +6,7 @@ import Modal from "@mui/material/Modal";
 import toast from "react-hot-toast";
 import axios from "axios";
 import "./RiceCard/RiceCard.css";
+import { TailSpin } from "react-loader-spinner";
 
 const style = {
   position: "absolute" as "absolute",
@@ -46,7 +47,9 @@ export default function AddSaleModal({
 
   const [count, setCount] = useState(1);
   const [type, setType] = useState("Cash");
+  const [loading, setLoading] = useState(false);
   const apiDomain = "https://rice-sales-backend.vercel.app";
+  // const apiDomain = "http://localhost:5555";
 
   const getCurrentDateFormatted = () => {
     const today = new Date();
@@ -74,20 +77,23 @@ export default function AddSaleModal({
       quantity: count,
       unitType: unit === "Bags" ? "bag" : "kg",
       date: getCurrentDateFormatted(),
-      type: type === "Cash" ? "cash" : "online",
+      paymentType: type === "Cash" ? "cash" : "online",
     });
 
     console.log("API Response: ", response);
     if (response.status === 200 || response.status === 201) {
       toast.success("Sales added successfully");
+      setLoading(false);
       handleClose();
     } else {
       toast.error("Failed to add sales");
+      setLoading(false);
     }
   };
 
   const onClickSubmit = () => {
     console.log("Submitted: ", rice.name, count, getCurrentDateFormatted());
+    setLoading(true);
     addSalesAPI();
   };
 
@@ -140,8 +146,25 @@ export default function AddSaleModal({
                 width: "100%",
               }}
             >
-              <button className="submitButton" onClick={onClickSubmit}>
-                Submit
+              <button
+                className="submitButton"
+                disabled={loading}
+                onClick={onClickSubmit}
+              >
+                {loading ? (
+                  <TailSpin
+                    visible={true}
+                    height="40"
+                    width="40"
+                    color="#000"
+                    ariaLabel="tail-spin-loading"
+                    radius="1"
+                    wrapperStyle={{}}
+                    wrapperClass=""
+                  />
+                ) : (
+                  "Submit"
+                )}
               </button>
             </div>
           </div>

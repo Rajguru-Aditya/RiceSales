@@ -46,7 +46,7 @@ function App() {
         <button
           className={
             optionBtnClicked === "Bags"
-              ? "salesButton selectedBtn"
+              ? "salesButton selectedNavBtn"
               : "salesButton"
           }
           onClick={() => setOptionBtnClicked("Bags")}
