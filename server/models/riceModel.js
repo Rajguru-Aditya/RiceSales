@@ -10,6 +10,11 @@ const productSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+
+  loosePrice: {
+    type: Number,
+    required: true, // Price per kg for loose rice
+  },
 });
 
 const Product = mongoose.model("Product", productSchema);

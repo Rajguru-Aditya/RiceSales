@@ -10,7 +10,7 @@
   padding: 10px;
   margin: 10px;
   max-width: 300px;
-  max-height: 300px;
+  max-height: 400px;
 }
 
 .allDetailsContainer {
@@ -41,4 +41,62 @@
   font-weight: normal;
   font-size: 26px;
   margin: 0;
+}
+
+.addButton {
+  background-color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 20px;
+  font-weight: bold;
+  color: rgb(0, 0, 0);
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.moreOptionsContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.optionsButtonContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.count {
+  font-weight: bold;
+}
+
+.countButton {
+  background-color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 20px;
+  font-weight: bold;
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  font-size: 30px;
+  height: 50px;
+  width: 50px;
+  cursor: pointer;
+}
+
+.submitButton {
+  background-color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 20px;
+  font-weight: bold;
+  color: rgb(0, 0, 0);
+  height: 50px;
+  cursor: pointer;
 }
