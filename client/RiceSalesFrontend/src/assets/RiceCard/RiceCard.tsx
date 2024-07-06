@@ -1,6 +1,6 @@
-import React, { useState } from "react";
 import "./RiceCard.css";
 import axios from "axios";
+import { useState } from "react";
 import toast from "react-hot-toast";
 
 interface Rice {
