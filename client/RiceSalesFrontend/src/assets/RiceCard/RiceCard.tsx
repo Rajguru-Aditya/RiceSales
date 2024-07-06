@@ -39,7 +39,7 @@ function RiceCard({ rice, unit }: { rice: Rice; unit: string }) {
     const response = await axios.post("http://localhost:5555/api/sales", {
       product: rice.name,
       quantity: count,
-      unit: unit,
+      unitType: unit === "Bags" ? "bag" : "kg",
       date: getCurrentDateFormatted(),
     });
 
