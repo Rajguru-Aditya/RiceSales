@@ -43,20 +43,22 @@ app.post("/api/products", async (req, res) => {
 
 // Add a new sale
 app.post("/api/sales", async (req, res) => {
-  const { product, quantity, unitType, date } = req.body;
-  if (!product || !quantity || !unitType || !date) {
-    return res
-      .status(400)
-      .send({ error: "Product, quantity, unit type, and date are required." });
+  const { product, quantity, date, paymentType } = req.body;
+
+  if (!product || !quantity || !paymentType) {
+    return res.status(400).send({ error: "Missing required fields" });
   }
+
+  if (!["cash", "online"].includes(paymentType)) {
+    return res.status(400).send({ error: "Invalid payment type" });
+  }
+
   try {
-    const saleDate = new Date(`${date}T00:00:00Z`); // Convert date string to UTC Date object
-    const sale = new Sale({ product, quantity, unitType, date: saleDate });
+    const sale = new Sale({ product, quantity, date, paymentType });
     await sale.save();
     res.status(201).send(sale);
   } catch (error) {
     res.status(500).send({ error: error.message });
-    console.log(error);
   }
 });
 

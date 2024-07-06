@@ -10,11 +10,6 @@ const salesSchema = new Schema({
     type: Number,
     required: true,
   },
-  unitType: {
-    type: String,
-    enum: ["bag", "kg"], // 'bag' for whole bags, 'kg' for loose rice
-    required: true,
-  },
   date: {
     type: Date,
     required: true,
@@ -22,6 +17,11 @@ const salesSchema = new Schema({
   },
   total: {
     type: Number,
+    required: true,
+  },
+  paymentType: {
+    type: String,
+    enum: ["cash", "online"],
     required: true,
   },
 });
@@ -35,13 +35,8 @@ salesSchema.pre("validate", async function (next) {
     if (!product) {
       return next(new Error("Product not found"));
     }
-
-    if (this.unitType === "bag") {
-      this.total = this.quantity * product.price; // Price per bag
-    } else if (this.unitType === "kg") {
-      this.total = this.quantity * product.loosePrice; // Price per kg
-    }
-
+    this.total =
+      this.quantity * (this.quantity < 25 ? product.loosePrice : product.price);
     next();
   } catch (error) {
     next(error);

@@ -57,8 +57,8 @@
 
 .moreOptionsContainer {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
   gap: 10px;
   flex-wrap: wrap;
@@ -67,30 +67,52 @@
 .optionsButtonContainer {
   display: flex;
   flex-direction: row;
-  gap: 10px;
+  gap: 30px;
+  align-items: center;
+  width: 100%;
 }
 
 .count {
   font-weight: bold;
+  font-size: 30px;
 }
 
 .countButton {
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(23, 23, 23);
   border: none;
   border-radius: 5px;
   padding: 5px;
   font-size: 20px;
   font-weight: bold;
-  color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
   font-weight: bold;
   font-size: 30px;
   height: 50px;
-  width: 50px;
+  width: 100px;
   cursor: pointer;
 }
 
+.typeButton {
+  background-color: rgb(52, 52, 52);
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 20px;
+  font-weight: bold;
+  color: rgb(199, 199, 199);
+  height: 50px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.selectedBtn {
+  background-color: rgb(42, 255, 92);
+  color: rgb(0, 0, 0);
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.2);
+}
+
 .submitButton {
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(42, 255, 92);
   border: none;
   border-radius: 5px;
   padding: 5px;
@@ -98,5 +120,6 @@
   font-weight: bold;
   color: rgb(0, 0, 0);
   height: 50px;
+  width: 100%;
   cursor: pointer;
 }
