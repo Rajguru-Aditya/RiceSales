@@ -4,6 +4,7 @@ import RiceCard from "./assets/RiceCard/RiceCard";
 import RiceData from "./assets/RiceData";
 import { useEffect, useState } from "react";
 import SalesModal from "./assets/SalesModal";
+import axios from "axios";
 
 function App() {
   interface RiceType {
@@ -17,11 +18,12 @@ function App() {
   const [optionBtnClicked, setOptionBtnClicked] = useState("Bags");
   const [salesModalOpen, setSalesModalOpen] = useState(false);
   const [salesData, setSalesData] = useState([]);
+  const apiDomain = "https://rice-sales-backend.vercel.app";
 
   const getAllSales = async () => {
     try {
-      const response = await fetch("http://localhost:5555/api/sales/all-dates");
-      const data = await response.json();
+      const response = await axios.get(`${apiDomain}/api/sales/all-dates`);
+      const data = response.data;
       setSalesData(data);
     } catch (error) {
       console.error(error);

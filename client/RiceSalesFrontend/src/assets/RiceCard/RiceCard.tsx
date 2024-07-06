@@ -14,6 +14,7 @@ interface Rice {
 function RiceCard({ rice, unit }: { rice: Rice; unit: string }) {
   const [cardClicked, setCardClicked] = useState(false);
   const [count, setCount] = useState(1);
+  const apiDomain = "https://rice-sales-backend.vercel.app";
 
   const getCurrentDateFormatted = () => {
     const today = new Date();
@@ -36,7 +37,7 @@ function RiceCard({ rice, unit }: { rice: Rice; unit: string }) {
 
   const addSalesAPI = async () => {
     // API call to add sales
-    const response = await axios.post("http://localhost:5555/api/sales", {
+    const response = await axios.post(`${apiDomain}/api/sales`, {
       product: rice.name,
       quantity: count,
       unitType: unit === "Bags" ? "bag" : "kg",
