@@ -138,6 +138,20 @@ const RiceData = [
     price: 850,
     loosePrice: 34,
     quantity: 1
+  },
+  {
+    id: 21,
+    name: "Abida",
+    price: 0,
+    loosePrice: 130,
+    quantity: 1
+  },
+  {
+    id: 22,
+    name: "Captain",
+    price: 0,
+    loosePrice:90,
+    quantity: 1
   }
 ];
 

@@ -69,9 +69,19 @@ function App() {
         </button>
       </div>
       <div className="cardsContainer">
-        {RiceData.map((rice: RiceType) => (
-          <RiceCard rice={rice} unit={optionBtnClicked} />
-        ))}
+        {RiceData.map((rice: RiceType) => {
+          // dont render card for Bags option type if Rice name is Abida or Captain
+          if (
+            optionBtnClicked === "Bags" &&
+            (rice.name === "Abida" || rice.name === "Captain")
+          ) {
+            return null;
+          } else {
+            return (
+              <RiceCard rice={rice} unit={optionBtnClicked} key={rice.id} />
+            );
+          }
+        })}
       </div>
     </div>
   );
